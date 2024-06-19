@@ -1,0 +1,304 @@
+* { box-sizing: border-box; }
+li { list-style: none;}
+a { color: #000; text-decoration: none; }
+:root { --vh: 100%; }
+body {
+  width: 100%;
+  height: var(--vh);
+}
+p { margin: 0; }
+
+/* 폰트 적용 css */
+.dangdanghae {
+  font-family: 'Dangdanghae' !important;
+}
+
+.loading-bg {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  width: 100vw;
+  height: calc(var(--vh, 1vh) * 100);
+  background-color: #000;
+  opacity: 0;
+  visibility: hidden;
+  transition: 2s;
+}
+
+.loading-bg-active {
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: calc(var(--vh, 1vh) * 100);
+  background-color: #000;
+  opacity: 1;
+  visibility: visible;
+  transition: 2s;
+}
+
+.main-container {
+  width: 100%;
+  height: 17000px;
+  background-color: #000;
+}
+
+.main-container * {
+  font-family: 'PrettyNight'
+}
+
+.main-container > .scroll-icon {
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+  bottom: -100px;
+}
+@keyframes show {
+  from { opacity: 0; bottom: -100px; }
+  to { opacity: 1; bottom: 30px; }
+}
+.main-container > .scroll-icon > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 메인 영상 section */
+#section-1 {
+  position: fixed; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: calc(var(--vh, 1vh) * 100);
+  overflow: hidden;
+}
+#section-1 > .main-text {
+  position: absolute;
+  transform: translateY(-50px);
+  z-index: 3;
+  color: #fff;
+  font-size: 50px;
+}
+#section-1 > .main-text > div {
+  display: flex;
+}
+#section-1 > .dimmed {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.5;
+}
+#section-1 > .main-text > div { line-height: 200px; }
+#section-1 > .main-text > div > .dot { color: #008DD7; }
+#section-1 > video {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+}
+@media screen and (max-aspect-ratio: 16/9) {
+  #section-1 > video {
+      width: auto;
+      height: calc(var(--vh, 1vh) * 100);
+  }
+}
+
+
+.circle-wrapper {
+  position: relative;
+  z-index: 4;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle-wrapper > .inner-text {
+  position: absolute;
+  z-index: 2;
+}
+
+.circle-wrapper > .inner-text > .line {
+  font-size: 40px;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.circle-wrapper > .inner-text > .line > div {
+  display: flex;
+}
+
+.circle-wrapper > .bg-circle {
+  position: absolute;
+  z-index: 1;
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+  background-color: #03215C;
+}
+
+
+/* 이미지 나오는 섹션 */
+.img-section {
+  position: absolute;
+  bottom: 0;
+  z-index: 5;
+  width: 100%;
+  height: calc(var(--vh, 1vh) * 100);
+  overflow: hidden;
+  clip-path: circle(0% at 50% 50%);
+}
+.img-section > .img1-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.img-section > .img1-wrapper::before {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+.img-section > .img1-wrapper > .img1-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  z-index: 3;
+  color: #fff;
+  font-size: 100px;
+  opacity: 0;
+  transition: 0.3s;
+}
+.img-section > .img1-wrapper > .img1-text > p {
+  margin-bottom: 0;
+  font-family: 'dangdanghae';
+}
+.img-section > .img1-wrapper > .img1-text > p:nth-child(3) {
+  color: gold;
+}
+.img-section > .img1-wrapper > .img1 {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  bottom: 0;
+}
+.img-section > .img2-wrapper {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  clip-path: inset(100% 0 0 0);
+  bottom: 0;
+}
+.img-section > .img2-wrapper > .img2 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.img-section > .img3-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  clip-path: inset(100% 0 0 0);
+  bottom: 0;
+}
+.img-section > .img3-wrapper > p {
+  position: relative;
+  z-index: 2;
+  font-size: 50px;
+  color: #fff;
+}
+.img-section > .img3-wrapper > .img3 {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(25%) contrast(150%) brightness(20%) hue-rotate(170deg);
+}
+
+/* light */
+.img-section > .img3-wrapper > .light {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  border-radius: 50%;
+  width: 1px;
+  height: 1px;
+  background-color: #fff;
+  filter: blur(0.2px);
+  -webkit-filter: blur(0.2px);
+  opacity: 0;
+}
+
+.img-section > .img4-wrapper {
+  position: absolute;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  /* clip-path: inset(100% 0 0 0); */
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.590, 0.010, 0.170, 1.000);
+}
+.img-section > .img4-wrapper > .img4 {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.img-section > .img4-wrapper > p {
+  position: relative;
+  z-index: 2;
+  font-size: 50px;
+  color: #000;
+}
+
+
+
+
+
+@media screen and (max-width: 480px) {
+  header { font-size: 20px; padding: 0 12px; }
+  header > nav > ul { gap: 12px; }
+  
+  .main-container > .scroll-icon { width: 50px; bottom: -100px; }
+  @keyframes show-m {
+    from { opacity: 0; bottom: -100px; }
+    to { opacity: 1; bottom: 10px; }
+  }
+  #section-1 > .main-text > div { font-size: 50px; line-height: 60px; }
+  .circle-wrapper { width: 100%; height: 100%; }
+  .circle-wrapper > .inner-text { width: 96%; }
+  .circle-wrapper > .inner-text > .line-1 { font-size: 28px; margin-bottom: 10px; padding-left: 14px; }
+  .circle-wrapper > .inner-text > .line-2 { font-size: 40px; height: 60px; }
+  .circle-wrapper > .inner-text > .line-2 > div { transform: translateX(14px); }
+  .img-section > .img1-wrapper > .img1-text { font-size: 50px; }
+  .img-section > .why > p { font-size: 80px; }
+  .img-section > .img4-wrapper > p:nth-child(1) { font-size: 30px; }
+  .img-section > .img4-wrapper > p:nth-child(2) { font-size: 30px; }
+}

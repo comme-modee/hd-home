@@ -1,0 +1,25 @@
+/* 날짜 hover시 --> 연한색 배경 */
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__month-text--keyboard-selected { background-color: rgba(var(--ct-primary-rgb), 0.5) !important; }
+
+.react-datepicker__month .react-datepicker__day:hover,
+.react-datepicker__month .react-datepicker__month-text:hover { background-color: rgba(var(--ct-primary-rgb), 0.5); }
+
+/* 비활성화된 부분 hover할때 */
+.react-datepicker__day--disabled:hover,
+.react-datepicker__month--disabled:hover, .react-datepicker__month-text--disabled:hover { background-color: rgba(var(--ct-primary-rgb), 0.2) !important; }
+
+/* 선택된 날짜 --> 진한색 배경 */
+.react-datepicker__day--selected,
+.react-datepicker__month-text--selected { background-color: #727cf5 !important; }
+
+
+/* 주간 캘린더: hover시 주별로 묶어서 css 적용 */
+.week-custom .react-datepicker__month .react-datepicker__week:hover { background-color: rgba(var(--ct-primary-rgb), 0.15); }
+
+
+
+
+@media screen and (max-width: 480px) {
+    .react-datepicker__input-container > .input-group { width: 200px !important; }
+}

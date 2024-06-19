@@ -1,0 +1,34 @@
+/* 포트폴리오 등록 양식 */
+.portfolio-form img {
+    width: 100%;
+}
+.portfolio-form > .img {
+    width: 100%;
+    padding: 10px;
+}
+.portfolio-form > .text {
+    padding: 10px;
+}
+.portfolio-form > .text > .title {
+    width: 100%;
+}
+.portfolio-form > .text span { width: 12%; white-space: nowrap; }
+.portfolio-form > .text > div {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.portfolio-form .btns {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--ct-border-color);
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+}
+
+.portfolio-form .main-img { height: 100px; width: auto; }
+.portfolio-form .thumbnail { height: 100px; width: auto; }

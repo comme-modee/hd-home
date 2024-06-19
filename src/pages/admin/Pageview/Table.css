@@ -1,0 +1,19 @@
+.table {
+    margin: 20px 0;
+    width: 100%;
+    text-align: center;
+}
+
+/* 테이블 헤더 */
+.table > .header { display: flex; border-bottom: 1px solid var(--ct-border-color); font-weight: 400; }
+.table > .header > div { padding: 12px 0; }
+.table > .header > .num { width: 10%; }
+.table > .header > .url { width: 75%; }
+.table > .header > .cnt { width: 15%; }
+
+/* 테이블 바디 */
+.table > .body > .content { display: flex; }
+.table > .body > .content > div { padding: 12px 0; border-bottom: 1px solid var(--ct-border-color); }
+.table > .body > .content > .num { width: 10%; }
+.table > .body > .content > .url { width: 75%; }
+.table > .body > .content > .cnt { width: 15%; }

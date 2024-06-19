@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta content="Coderthemes" name="Coderthemes" />
+  <title>(주)햇님달님</title>
+
+  <script>const global = globalThis;</script>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="hyper"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+<script>
+  (function() {
+      let last = 0;
+      let startTime = new Date();
+  
+      function setCookie(name, value, days) {
+          var expires = "";
+          if (days) {
+              var date = new Date();
+              date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+              expires = "; expires=" + date.toUTCString();
+          }
+          document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+      }
+  
+      function getCookie(name) {
+          var nameEQ = name + "=";
+          var ca = document.cookie.split(';');
+          for(var i = 0; i < ca.length; i++) {
+              var c = ca[i];
+              while (c.charAt(0) === ' ') c = c.substring(1,c.length);
+              if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+          }
+          return null;
+      }
+  
+      function checkVisitor() {
+          var lastVisit = getCookie("lastVisit");
+          var currentDate = new Date();
+          var oneDay = 24 * 60 * 60 * 1000; 
+  
+          if (lastVisit) {
+              var lastVisitDate = new Date(lastVisit);
+              if (currentDate - lastVisitDate > oneDay) {
+                   last = 1;
+              }
+          }
+          setCookie("lastVisit", currentDate.toUTCString(), 7); 
+      }
+  
+      checkVisitor();
+  
+      var visitorData = {
+          browserType: navigator.userAgent,
+          operatingSystem: navigator.platform,
+          deviceInfo: navigator.userAgent, 
+          visitedPage: window.location.href,
+          languageSetting: navigator.language,
+          screenResolution: window.screen.width + "x" + window.screen.height,
+          cookie: last,
+          referrerData: document.referrer
+      };
+  
+      fetch('http://192.168.0.240:8081/adminapi/visitor', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(visitorData)
+      });
+  
+      window.onbeforeunload = function() {
+          var endTime = new Date();
+          var stayTime = endTime - startTime; 
+  
+          var visitorData = {
+              visitedPage: window.location.href,
+              stayDuration: stayTime / 1000
+          };
+  
+          fetch('http://192.168.0.240:8081/adminapi/visitortime', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(visitorData)
+          });
+      }
+  })();
+</script>
+</html>
