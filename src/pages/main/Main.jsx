@@ -6,6 +6,7 @@ import Buttons from './component/Buttons/Buttons';
 import ScrollIcon from './component/ScrollIcon/ScrollIcon';
 import Poster from './img/count-page-poster.png'
 import MainPoster from './img/main-poster.png'
+import Img4Bg from './img/main/img-4.png'
 
 import './css/Main.css';
 
@@ -144,7 +145,7 @@ function App() {
         }, 1000);
         setTimeout(() => {
           section4CenterLine.current.style.opacity = 0;
-          section4.current.style.background = `url('/src/pages/main/img/main/img-4.png') center/cover`;
+          section4.current.style.background = `url(${Img4Bg}) center/cover`;
         }, 1500);
         setTimeout(() => {
           section4Text.current.style.opacity = 1;
