@@ -5,7 +5,7 @@ function Portfolio() {
 
   return {
         addPortfolio: (portfolioData) => {
-            console.log('portfolio api in', portfolioData)
+            // console.log('portfolio api in', portfolioData)
 
             return new Promise(function (resolve, reject) { 
                 try {
@@ -62,7 +62,7 @@ function Portfolio() {
         },
 
         editPortfolio: (portfolioData) => {
-            console.log('edit portfolio api in', portfolioData)
+            // console.log('edit portfolio api in', portfolioData)
 
             return new Promise(function (resolve, reject) { 
                 try {
@@ -84,8 +84,31 @@ function Portfolio() {
             });
         },
 
+        deletePortfolio: (seq) => {
+            // console.log('delete portfolio api in', seq)
+
+            return new Promise(function (resolve, reject) { 
+                try {
+                    HttpClient.delete(`/adminapi/portfolio/${seq}`, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+                    .then(response => {
+                    resolve(response);
+                    })
+                    .catch(error => {
+                    console.error(error, "1");
+                    reject(error);
+                    });
+                } catch (error) {
+                    console.error('오류 발생:', error);
+                }
+            });
+        },
+
         sortPortfolioList: (seqList) => {
-            console.log('sort portfolio api in', seqList)
+            // console.log('sort portfolio api in', seqList)
 
             return new Promise(function (resolve, reject) { 
                 try {

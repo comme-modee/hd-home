@@ -18,7 +18,7 @@ function HttpClient() {
 		);
 		
 		const _httpClient = axios.create({
-			baseURL: 'http://192.168.0.240:8081',
+			baseURL: 'http://211.252.30.69:8081',
 			timeout: 6000,
 			headers: {
 				'Content-Type': 'application/json'

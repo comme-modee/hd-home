@@ -25,12 +25,11 @@ import Flex from './Flex';
 
 const initialPortfolioData = {
   pt_name: '',
-  pt_goal: '',
-  pt_manage: '',
-  pt_activity: '',
-  pt_goal_c: '',
-  pt_manage_c: '',
-  pt_activity_c: ''
+  pt_mission1: '',
+  pt_mission2: '',
+  pt_contents1: '',
+  pt_contents2: '',
+  pt_contents3: ''
 };
 
 const Portfolio = () => {
@@ -40,8 +39,26 @@ const Portfolio = () => {
   const [ editPortfolioData, setEditPortfolioData ] = useState({});
 	const { toggleModal } = useModal();
   const [ portfolioData, setPortfolioData ] = useState({...initialPortfolioData});
-  const { portfolioList, dataLoading, addLoading, editLoading, sortLoading, sortData, getPortfolioList, setMainImg, setThumbnail, handleMainImgChange, handleThumbnailChange, inquiry } = usePortfolio();
+  const { portfolioList, dataLoading, addLoading, editLoading, deleteLoading, sortLoading, deletePortfolio, sortData, getPortfolioList, thumbnail, setThumbnail, handleThumbnailChange, inquiry } = usePortfolio();
   const [ mode, setMode ] = useState('');
+  const [ previewThumbnailSrc, setPreviewThumbnailSrc ] = useState('');
+
+  //새 포트폴리오 등록에서 썸네일 업로드하면 미리보기창 띄워주기
+  const readThumbnailURL = (file) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setPreviewThumbnailSrc(e.target.result)
+      }
+      reader.readAsDataURL(file)
+  }
+
+  useEffect(() => {
+    if(thumbnail) {
+      readThumbnailURL(thumbnail)
+    } else {
+      setPreviewThumbnailSrc('')
+    }
+  },[thumbnail])
 
   //dnd-kit
   const [ items, setItems ] = useState([]);
@@ -65,7 +82,7 @@ const Portfolio = () => {
 
   useEffect(()=>{
     getPortfolioList()
-  },[])
+  },[deletePortfolio])
 
   useEffect(()=>{
     if(!dataLoading && portfolioList && portfolioList.length > 0) {
@@ -113,7 +130,7 @@ const Portfolio = () => {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    console.log('모드', mode)
+    // console.log('모드', mode)
     if(mode === 'new') {
       setPortfolioData({ ...portfolioData, [id]: value });
     } else if(mode === 'edit') {
@@ -154,7 +171,6 @@ const Portfolio = () => {
     if(isAddModalOpen) {
       setMode('new');
     } else {
-      setMainImg(null)
       setThumbnail(null)
       //새 포트폴리오 모달이 닫히면 form 내용과 mode 초기화
       setPortfolioData({...initialPortfolioData})
@@ -173,11 +189,12 @@ const Portfolio = () => {
 
   },[isEditModalOpen])
 
-  useEffect(()=>{
-    if(Object.keys(editPortfolioData).length !== 0) {
-      console.log('수정될 데이터:', editPortfolioData)
-    }
-  },[editPortfolioData])
+  // useEffect(()=>{
+  //   if(Object.keys(editPortfolioData).length !== 0) {
+  //     console.log('수정될 데이터:', editPortfolioData)
+  //   }
+  // },[editPortfolioData])
+
 
   return (
     <>
@@ -200,92 +217,79 @@ const Portfolio = () => {
                 </Modal.Header>
                 <Modal.Body>
                   <Form className='portfolio-form' onSubmit={addPortfolio}>
-                    <Form.Group>
-                      <Form.Label>본문 상단 이미지</Form.Label>
-                      <Form.Control
-                        type='file'
-                        className='form-control' 
-                        required
-                        onChange={handleMainImgChange}
-                      />
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Label>썸네일 이미지</Form.Label>
-                      <Form.Control
-                        type='file'
-                        className='form-control' 
-                        required
-                        onChange={handleThumbnailChange}
-                      />
-                    </Form.Group>
+                    <div className='thumbnail-container mb-2'>
+                      <Form.Group>
+                        <Form.Label>썸네일</Form.Label>
+                        <Form.Control
+                          type='file'
+                          onChange={handleThumbnailChange}
+                        />
+                      </Form.Group>
+                      {previewThumbnailSrc && <img src={previewThumbnailSrc} alt='' className='thumbnail'/>}
+                    </div>
                     <Form.Group as={Col} controlId="pt_name">
                       <Form.Label>제목</Form.Label>
                       <Form.Control
                         type='text' 
-                        placeholder='제목' 
-                        className='form-control' 
+                        placeholder='제목을 입력해주세요' 
+                        className='mb-2' 
                         required
                         onChange={(e) => handleChange(e)}
                         value={portfolioData.pt_name}
                       />
                     </Form.Group>
-                    <Form.Group as={Col} controlId="pt_goal">
+                    <Form.Group as={Col} controlId="pt_mission1">
                       <Form.Label>마케팅 목표</Form.Label>
                       <Form.Control
-                        placeholder='마케팅 목표 내용 입력' 
-                        className='form-control'
+                        placeholder='15자 이하로 입력해주세요' 
+                        className='mb-1'
                         required 
+                        maxLength={15}
                         onChange={(e) => handleChange(e)}
-                        value={portfolioData.pt_goal}
+                        value={portfolioData.pt_mission1}
                       />
                     </Form.Group>
-                    <Form.Group as={Col} controlId="pt_goal_c">
+                    <Form.Group as={Col} controlId="pt_mission2">
                       <Form.Control
-                        type='color' 
-                        className='form-control' 
-                        required
+                        placeholder='15자 이하로 입력해주세요' 
+                        className='mb-2'
+                        required 
+                        maxLength={15}
                         onChange={(e) => handleChange(e)}
-                        value={portfolioData.pt_goal_c}
+                        value={portfolioData.pt_mission2}
                       />
                     </Form.Group>
-                    <Form.Group as={Col} controlId="pt_manage">
-                      <Form.Label>운영/관리</Form.Label>
-                      <Form.Control
-                        type='text' 
-                        placeholder='운영/관리 내용 입력' 
-                        className='form-control' 
-                        required
-                        onChange={(e) => handleChange(e)}
-                        value={portfolioData.pt_manage}
-                      />
-                    </Form.Group>
-                    <Form.Group as={Col} controlId="pt_manage_c">
-                      <Form.Control
-                        type='color' 
-                        className='form-control' 
-                        required
-                        onChange={(e) => handleChange(e)}
-                        value={portfolioData.pt_manage_c}
-                      />
-                    </Form.Group>
-                    <Form.Group as={Col} controlId="pt_activity">
+                    <Form.Group as={Col} controlId="pt_contents1">
                       <Form.Label>마케팅 활동</Form.Label>
                       <Form.Control
                         type='text' 
-                        placeholder='마케팅 활동 내용 입력' 
-                        className='form-control' 
+                        placeholder='15자 이하로 입력해주세요 (ex. #인플루언서 #네이버검색노출)' 
+                        className='mb-1' 
                         required
+                        maxLength={15}
                         onChange={(e) => handleChange(e)}
-                        value={portfolioData.pt_activity}
+                        value={portfolioData.pt_contents1}
                       />
                     </Form.Group>
-                    <Form.Group as={Col} controlId="pt_activity_c">
+                    <Form.Group as={Col} controlId="pt_contents2">
                       <Form.Control
-                        type='color' 
-                        className='form-control' 
+                        type='text' 
+                        placeholder='15자 이하로 입력해주세요 (ex. #인플루언서 #네이버검색노출)' 
+                        className='mb-1' 
                         required
+                        maxLength={15}
                         onChange={(e) => handleChange(e)}
-                        value={portfolioData.pt_activity_c}
+                        value={portfolioData.pt_contents2}
+                      />
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="pt_contents3">
+                      <Form.Control
+                        type='text' 
+                        placeholder='15자 이하로 입력해주세요 (ex. #인플루언서 #네이버검색노출)' 
+                        required
+                        maxLength={15}
+                        onChange={(e) => handleChange(e)}
+                        value={portfolioData.pt_contents3}
                       />
                     </Form.Group>
                     <div className='btns'>
@@ -308,94 +312,80 @@ const Portfolio = () => {
                 </Modal.Header>
                 <Modal.Body>
                   <Form className='portfolio-form' onSubmit={editPortfolio}>
-                    <Form.Group>
-                      <Form.Label>본문 상단 이미지</Form.Label>
-                      <Form.Control
-                        type='file'
-                        className='form-control' 
-                        onChange={handleMainImgChange}
-                      />
-                      <Form.Label>기존 이미지</Form.Label>
-                      <img src={editPortfolioData.pt_img} alt='' className='main-img'/>
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Label>썸네일 이미지</Form.Label>
-                      <Form.Control
-                        type='file'
-                        className='form-control' 
-                        onChange={handleThumbnailChange}
-                      />
-                      <Form.Label>기존 이미지</Form.Label>
+                    <div className='thumbnail-container mb-2'>
+                      <Form.Group>
+                        <Form.Label>썸네일</Form.Label>
+                        <Form.Control
+                          type='file'
+                          onChange={handleThumbnailChange}
+                        />
+                        <small>* 이미지를 새로 업로드하지 않을 시 기존 이미지가 유지됩니다.</small>
+                      </Form.Group>
                       <img src={editPortfolioData.pt_thumbnail} alt='' className='thumbnail'/>
-                    </Form.Group>
+                    </div>
                     <Form.Group as={Col} controlId="pt_name">
                       <Form.Label>제목</Form.Label>
                       <Form.Control
                         type='text' 
-                        placeholder='제목' 
-                        className='form-control' 
+                        placeholder='제목을 입력해주세요' 
+                        className='mb-2' 
                         required
                         onChange={(e) => handleChange(e)}
                         value={editPortfolioData.pt_name}
                       />
                     </Form.Group>
-                    <Form.Group as={Col} controlId="pt_goal">
+                    <Form.Group as={Col} controlId="pt_mission1">
                       <Form.Label>마케팅 목표</Form.Label>
                       <Form.Control
-                        placeholder='마케팅 목표 내용 입력' 
-                        className='form-control'
+                        placeholder='15자 이하로 입력해주세요' 
+                        className='mb-1'
                         required 
+                        maxLength={15}
                         onChange={(e) => handleChange(e)}
-                        value={editPortfolioData.pt_goal}
+                        value={editPortfolioData.pt_mission1}
                       />
                     </Form.Group>
-                    <Form.Group as={Col} controlId="pt_goal_c">
+                    <Form.Group as={Col} controlId="pt_mission2">
                       <Form.Control
-                        type='color' 
-                        className='form-control' 
-                        required
+                        placeholder='15자 이하로 입력해주세요' 
+                        className='mb-2'
+                        required 
+                        maxLength={15}
                         onChange={(e) => handleChange(e)}
-                        value={editPortfolioData.pt_goal_c}
+                        value={editPortfolioData.pt_mission2}
                       />
                     </Form.Group>
-                    <Form.Group as={Col} controlId="pt_manage">
-                      <Form.Label>운영/관리</Form.Label>
-                      <Form.Control
-                        type='text' 
-                        placeholder='운영/관리 내용 입력' 
-                        className='form-control' 
-                        required
-                        onChange={(e) => handleChange(e)}
-                        value={editPortfolioData.pt_manage}
-                      />
-                    </Form.Group>
-                    <Form.Group as={Col} controlId="pt_manage_c">
-                      <Form.Control
-                        type='color' 
-                        className='form-control' 
-                        required
-                        onChange={(e) => handleChange(e)}
-                        value={editPortfolioData.pt_manage_c}
-                      />
-                    </Form.Group>
-                    <Form.Group as={Col} controlId="pt_activity">
+                    <Form.Group as={Col} controlId="pt_contents1">
                       <Form.Label>마케팅 활동</Form.Label>
                       <Form.Control
                         type='text' 
-                        placeholder='마케팅 활동 내용 입력' 
-                        className='form-control' 
+                        placeholder='15자 이하로 입력해주세요 (ex. #인플루언서 #네이버검색노출)' 
+                        className='mb-1' 
                         required
+                        maxLength={15}
                         onChange={(e) => handleChange(e)}
-                        value={editPortfolioData.pt_activity}
+                        value={editPortfolioData.pt_contents1}
                       />
                     </Form.Group>
-                    <Form.Group as={Col} controlId="pt_activity_c">
+                    <Form.Group as={Col} controlId="pt_contents2">
                       <Form.Control
-                        type='color' 
-                        className='form-control' 
+                        type='text' 
+                        placeholder='15자 이하로 입력해주세요 (ex. #인플루언서 #네이버검색노출)' 
+                        className='mb-1' 
                         required
+                        maxLength={15}
                         onChange={(e) => handleChange(e)}
-                        value={editPortfolioData.pt_activity_c}
+                        value={editPortfolioData.pt_contents2}
+                      />
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="pt_contents3">
+                      <Form.Control
+                        type='text' 
+                        placeholder='15자 이하로 입력해주세요 (ex. #인플루언서 #네이버검색노출)' 
+                        required
+                        maxLength={15}
+                        onChange={(e) => handleChange(e)}
+                        value={editPortfolioData.pt_contents3}
                       />
                     </Form.Group>
                     <div className='btns'>

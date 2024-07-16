@@ -25,18 +25,18 @@
     opacity: 0;
     transition: all 0.5s ease;
 }
-#count-page .text-container > .title > p { font-size: 84px; }
+#count-page .text-container > .title > p { font-size: 56px; }
 #count-page .text-container > .num-container {
     position: relative;
     display: flex;
-    gap: 100px;
+    gap: 80px;
     padding: 20px 30px 50px 30px;
     opacity: 0;
     transition: all 0.5s ease;
 }
 #count-page .text-container > .num-container > div { text-align: center; }
 #count-page .text-container > .num-container > .count1 { width: 160px; position: relative; z-index: 3; }
-#count-page .text-container > .num-container > .count2 { width: 280px; position: relative; z-index: 3; }
+#count-page .text-container > .num-container > .count2 { width: 320px; position: relative; z-index: 3; }
 #count-page .text-container > .num-container > .count3 { width: 200px; position: relative; z-index: 3; }
 
 .firefly {
@@ -87,17 +87,24 @@
 }
 
 #count-page .text-container > .num-container > div > span {
+    font-family: 'Euljiro';
     font-size: 120px;
     font-weight: 500;
     line-height: normal;
-    color: rgba(242, 186, 82, 0.7);
+    color: rgba(242, 186, 82, 1);
     margin-bottom: 0;
+    white-space: nowrap;
+}
+#count-page .text-container > .num-container > div > span > .small-text {
+    font-size: 36px;
+    padding-left: 10px;
 }
 #count-page .text-container > .num-container > div > p {
-    font-size: 40px;
+    font-size: 32px;
     font-weight: 100;
-    color: rgba(242, 186, 82, 0.7);
+    color: rgba(242, 186, 82, 1);
     margin-bottom: 0;
+    white-space: nowrap;
 }
 #count-page .dimmed {
     position: absolute;
@@ -142,7 +149,7 @@
     #count-page .text-container > .title > p { font-size: 50px; }
     #count-page .text-container > .num-container { gap: 40px; }
     #count-page .text-container > .num-container > div > span { font-size: 80px; }
-    #count-page .text-container > .num-container > div > p { font-size: 32px; white-space: nowrap; }
+    #count-page .text-container > .num-container > div > p { font-size: 24px; white-space: nowrap; }
     #count-page .text-container > .num-container > .count1 { width: 120px; }
     #count-page .text-container > .num-container > .count2 { width: 200px; }
     #count-page .text-container > .num-container > .count3 { width: 160px; }
@@ -151,9 +158,13 @@
 @media screen and (max-width: 540px) {
     #count-page .text-container > .title > p { font-size: 30px; }
     #count-page .text-container > .num-container { gap: 10px; padding: 0px 0px 50px 0px; }
-    #count-page .text-container > .num-container > div > span { font-size: 46px; }
+    #count-page .text-container > .num-container > div > span { font-size: 42px; }
     #count-page .text-container > .num-container > div > p { font-size: 18px; }
     #count-page .text-container > .num-container > .count1 { width: 80px; }
     #count-page .text-container > .num-container > .count2 { width: 120px; }
     #count-page .text-container > .num-container > .count3 { width: 100px; }
+    #count-page .text-container > .num-container > div > span > .small-text {
+        font-size: 24px;
+        padding-left: 6px;
+    }
 }

@@ -4,7 +4,7 @@ import { useState } from 'react';
 export default function useContact() {
 	
 	const [ loading, setLoading ] = useState(false);
-	const [ statusMessage, setStatusMessage ] = useState({})
+	const [ statusMessage, setStatusMessage ] = useState(null)
 	
 	const [selectedFile, setSelectedFile] = useState(null);
 
@@ -36,11 +36,11 @@ export default function useContact() {
                 setSelectedFile(null);
                 setLoading(false);
 				setStatusMessage({message: '문의 등록이 완료되었습니다.', status: 'success'})
-				setTimeout(() => setStatusMessage(''), 4000);
+				setTimeout(() => setStatusMessage(null), 4000);
             }
         } catch (error) {
 			setStatusMessage({message: '문의 등록이 실패하였습니다. 다시 시도해주세요.', status: 'fail'})
-			setTimeout(() => setStatusMessage(''), 4000);
+			setTimeout(() => setStatusMessage(null), 4000);
         }
     }
 

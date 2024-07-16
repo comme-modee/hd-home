@@ -30,5 +30,8 @@
     justify-content: end;
 }
 
-.portfolio-form .main-img { height: 100px; width: auto; }
 .portfolio-form .thumbnail { height: 100px; width: auto; }
+.portfolio-form .thumbnail-container { display: flex; justify-content: space-between; }
+.portfolio-form .thumbnail-container div { width: 100%; }
+.portfolio-form .thumbnail-container img { padding-left: 10px; }
+.portfolio-form .thumbnail-container small { color: var(--ct-primary); }

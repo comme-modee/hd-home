@@ -2,4 +2,23 @@
     background-color: #03215C;
     color: #fff;
     padding: 50px;
+    font-family: 'Pretendard';
+    font-size: 16px;
+    font-weight: 100;
+}
+#mainFooter .bold {
+    font-weight: 300;
+}
+#mainFooter footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#mainFooter footer > div:nth-child(3) { font-size: 14px; }
+
+@media screen and (max-width: 540px) {
+    #mainFooter {
+        padding: 30px;
+        font-size: 14px;
+    }
 }

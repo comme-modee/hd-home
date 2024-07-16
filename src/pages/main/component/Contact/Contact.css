@@ -1,9 +1,10 @@
 #contact {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     background-color: #fff;
 }
 
@@ -69,12 +70,20 @@
     margin-top: 14px;
     font-size: 16px;
 }
-#contact .content-wrapper > form > .privacy-consent-checkbox {
+#contact .content-wrapper > form > .privacy-consent {
+    display: flex;
+    font-size: 16px;
+    gap: 6px;
+}
+#contact .content-wrapper > form > .privacy-consent > .privacy-consent-checkbox {
     display: flex;
     align-items: center;
     gap: 6px;
     padding: 0 0 30px 0;
-    font-size: 16px;
+}
+#contact .content-wrapper > form > .privacy-consent > div {
+    color: #8DA9F8;
+    cursor: pointer;
 }
 #contact .content-wrapper > form > button,
 #contact .content-wrapper > form > .download-btn {
@@ -88,6 +97,7 @@
     background-color: #03215C;
     color: #fff;
     font-size: 18px;
+    height: 45px;
 }
 
 #contact .content-wrapper > form > .download-btn {
@@ -104,19 +114,77 @@
     width: 20px;
 }
 
+.privacy-policy {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: calc(var(--vh, 1vh) * 90);
+    transition: all 0.5s ease;
+    background-color: #fff;
+    padding: 40px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    text-align: justify;
+}
+.privacy-policy > .header {
+    font-size: 30px;
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.privacy-policy > .header > .close-btn {
+    cursor: pointer;
+}
+.privacy-policy > .privacy-policy-inner-text {
+    font-family: 'Pretendard';
+    font-size: 16px;
+    line-height: 26px;
+    height: calc(100% - 80px);
+    overflow-y: auto;
+}
+.privacy-policy > .privacy-policy-inner-text > .title {
+    font-size: 20px;
+    font-weight: 500;
+    padding-bottom: 6px;
+}
+.privacy-policy table {
+    text-align: center;
+}
 @media screen and (max-width: 1024px) {
     #contact .content-wrapper > .title { font-size: 30px; }
     #contact .content-wrapper > form > .form-row { gap: 10px; }
     #contact .content-wrapper > form > .privacy-consent-checkbox { padding: 10px 0 30px 0; }
+    .privacy-policy { padding: 30px; }
+    .privacy-policy > .header { font-size: 26px; padding-bottom: 20px; }
+    .privacy-policy > .privacy-policy-inner-text { font-size: 14px; line-height: 24px; height: calc(100% - 60px); }
+    .privacy-policy > .privacy-policy-inner-text > .title { font-size: 18px; }
 }
 
 @media screen and (max-width: 660px) {
+    #contact .content-wrapper > .title { font-size: 24px; }
     #contact .content-wrapper { padding: 40px 0px 20px 0px; }
     #contact .content-wrapper > form > .form-row { flex-direction: column; gap: 0; border-bottom: none; }
-    #contact .content-wrapper > form > .form-row > label { width: 100% !important; border-bottom: 1px solid rgba(0, 0, 0, 0.2); padding: 6px 0; }
+    #contact .content-wrapper > form > .form-row > label { width: 100% !important; border-bottom: 1px solid rgba(0, 0, 0, 0.2); padding: 2px 0; }
     
-    #contact .content-wrapper > form > .form-title { padding: 14px 0 6px 0; }
-    #contact .content-wrapper > form > .contact-textarea { margin-top: 6px; height: 80px; }
-    #contact .content-wrapper > form > .privacy-consent-checkbox { padding: 0 0 20px 0; }
-    #contact .content-wrapper > form > .download-btn { margin-bottom: 50px; }
+    #contact .content-wrapper > form * { font-size: 14px; }
+    #contact .content-wrapper > form > .form-title { padding: 14px 0 4px 0; font-size: 16px; }
+    #contact .content-wrapper > form > .contact-textarea { margin-top: 4px; height: 60px; }
+    #contact .content-wrapper > form > .privacy-consent > .privacy-consent-checkbox { padding: 0 0 14px 0; }
+    #contact .content-wrapper > form > button, 
+    #contact .content-wrapper > form > .download-btn {
+        height: 36px;
+        font-size: 16px;
+        padding: 0;
+        margin-bottom: 6px;
+    }
+    #contact .content-wrapper > form > .form-row > label > input[type='file'] { padding: 4px; }
+    
+    .privacy-policy { padding: 20px; }
+    .privacy-policy > .header { font-size: 22px; padding-bottom: 10px; }
+    .privacy-policy > .privacy-policy-inner-text { font-size: 12px; line-height: 20px; height: calc(100% - 40px); }
+    .privacy-policy > .privacy-policy-inner-text > .title { font-size: 16px; }
 }

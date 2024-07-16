@@ -6,35 +6,35 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 20px;
+    padding: 16px;
     color: #222;
-    font-weight: 500;
     font-family: 'Pretendard';
     background-color: rgb(255, 255, 255, 0.7);
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    font-size: 18px;
+    font-size: 16px;
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     opacity: 0;
     animation: fadeInOut 4s ease-in-out forwards;
 }
 
 .contact-status-message-fail {
-    color: rgba(87, 17, 31, 0.7);
-    background-color: rgb(250, 92, 124, 0.1);
+  background-color: var(--ct-danger-bg-subtle);
+  border-color: var(--ct-danger-border-subtle);
+  color: rgb(var(--ct-danger-rgb));
 }
 
 .contact-status-message-success {
-    color: rgba(19, 51, 90, 0.7);
-    background-color: rgba(57, 123, 209, 0.1);
+    background-color: var(--ct-info-bg-subtle);
+    border-color: var(--ct-info-border-subtle);
+    color: rgb(var(--ct-info-rgb));
 }
 
 @keyframes fadeInOut {
     0% {
       opacity: 0;
-      transform: translateX(-50%) translateY(10px);
+      transform: translateX(-50%) translateY(20px);
     }
     10% {
       opacity: 1;
@@ -46,6 +46,6 @@
     }
     100% {
       opacity: 0;
-      transform: translateX(-50%) translateY(10px);
+      transform: translateX(-50%) translateY(20px);
     }
 }
