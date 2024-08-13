@@ -82,14 +82,14 @@ const CountPage = ({ show, isMobile, isTablet, countPageVideo, countPageTitle, c
           <div className='line'></div>
 
           <div className='count2'>
-            <span>{show && <CountUp end={3456} duration={5}/>}<span className='small-text'>+</span></span>
+            <span>{show && <CountUp end={467} duration={5}/>}<span className='small-text'>+</span></span>
             <p>함께한 파트너</p>
           </div>
 
           <div className='line'></div>
           
           <div className='count3'>
-            <span>{show && <CountUp end={789} duration={5}/>}<span className='small-text'>+</span></span>
+            <span>{show && <CountUp end={1176} duration={5}/>}<span className='small-text'>+</span></span>
             <p>진행 프로젝트</p>
           </div>
         </div>
